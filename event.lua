@@ -11,22 +11,22 @@ function event.new(self)
 	return ev
 end
 
-function event.register(self, source, f)
-	table.insert(self, {source, f})
+function event.register(self, callbacks, fuc)
+	table.insert(self, {callbacks, fuc})
 
 	return #self
 end
 
-function event.unregister(self, idx)
-	table.remove(self, idx)
+function event.unregister(self, index)
+	table.remove(self, index)
 end
 
-function event.call(tb, ...)
-	for _, t in ipairs(tb) do
-		local source = t[1]
-		local f = t[2]
+function event.call(tbl, ...)
+	for _, t in ipairs(tbl) do
+		local callbacks = t[1]
+		local fuc = t[2]
 
-		f(source, ...)
+		fuc(callbacks, ...)
 	end
 end
 
